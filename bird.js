@@ -1,3 +1,14 @@
+function mutate(x) {
+  if (random(1) < 0.1) {
+    let offset = randomGaussian() * 0.5;
+    let newx = x + offset;
+    return newx;
+  } else {
+    return x;
+  }
+}
+
+
 class Bird{
   constructor(){
     this.lift = -10;
@@ -9,7 +20,7 @@ class Bird{
 
 
 
-    this.brain = new NeuralNetwork(4,5,1);
+    this.brain = new NeuralNetwork(5,5,1);
 
     this.score = 0;
     this.fitness = 0;
@@ -47,14 +58,21 @@ class Bird{
     let input = [];
 
     input[0] = this.y;
-    input[1] = wall.y;
-    input[2] = wall.bottom;
-    input[3] = this.velocity;
-
+    input[1] = wall.x;
+    input[2] = wall.y;
+    input[3] = wall.bottom;
+    input[4] = this.velocity;
     let output = this.brain.predict(input);
     if(output[0]>0.5){
       this.jump();
     }
+  }
+
+  mutate(){
+    this.brain.mutate(mutate);
+  }
+  setBrain(newBrain){
+    this.brain = newBrain ;
   }
 
 }
