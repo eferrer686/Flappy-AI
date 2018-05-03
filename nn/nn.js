@@ -59,6 +59,7 @@ class NeuralNetwork {
     // Generating the Hidden Outputs
     let inputs = Matrix.fromArray(input_array);
     let hidden = Matrix.multiply(this.weights_ih, inputs);
+
     hidden.add(this.bias_h);
     // activation function!
     hidden.map(this.activation_function.func);
