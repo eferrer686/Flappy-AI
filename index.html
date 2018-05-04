@@ -1,23 +1,66 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <!-- PLEASE NO CHANGES BELOW THIS LINE (UNTIL I SAY SO) -->
-  <script language="javascript" type="text/javascript" src="libraries/p5.js"></script>
-  <script language="javascript" type="text/javascript" src="libraries/p5.sound.js"></script>
-  <script language="javascript" type="text/javascript" src="libraries/p5.dom.js"></script>
 
-  <script language="javascript" type="text/javascript" src="nn/matrix.js"></script>
-  <script language="javascript" type="text/javascript" src="nn/nn.js"></script>
-  <script language="javascript" type="text/javascript" src="geneticAlg.js"></script>
-  <script language="javascript" type="text/javascript" src="bird.js"></script>
-  <script language="javascript" type="text/javascript" src="wall.js"></script>
-  <script language="javascript" type="text/javascript" src="FlappyAI.js"></script>
-  <!-- OK, YOU CAN MAKE CHANGES BELOW THIS LINE AGAIN -->
+  <h1>Flappy AI</h1>
+  <p>A small AI using P5.js libraries and NEAT algorithm!</p>
+  <div class="flappyAI">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- PLEASE NO CHANGES BELOW THIS LINE (UNTIL I SAY SO) -->
+    <script language="javascript" type="text/javascript" src="libraries/p5.js"></script>
+    <script language="javascript" type="text/javascript" src="libraries/p5.sound.js"></script>
+    <script language="javascript" type="text/javascript" src="libraries/p5.dom.js"></script>
+    <script language="javascript" type="text/javascript" src="nn/matrix.js"></script>
+    <script language="javascript" type="text/javascript" src="nn/nn.js"></script>
+    <script language="javascript" type="text/javascript" src="geneticAlg.js"></script>
+    <script language="javascript" type="text/javascript" src="bird.js"></script>
+    <script language="javascript" type="text/javascript" src="wall.js"></script>
+    <script language="javascript" type="text/javascript" src="FlappyAI.js"></script>
+    <!-- OK, YOU CAN MAKE CHANGES BELOW THIS LINE AGAIN -->
+  </div>
+  <p>Number of birds alive: </p>
+  <p>Best Score: </p>
+
+  <div class="slider">
+    <input type="range" min="1" max="10" value="1" class="slider" id="vel">
+  </div>
 
   <!-- This line removes any default padding and style.
        You might only need one of these values set. -->
-  <style> body {padding: 0; margin: 0;} </style>
+  <style>
+  h1,p {
+      font-family: sans-serif;
+      text-align: center;
+      color: white;
+    }
+  html{background-color: grey;}
+  body {padding: 0; margin: 0;}
+  .slider {
+    position: relative;
+    display: block;
+    -webkit-appearance: none;
+    height: 15px;
+    width: 50%;
+    border-radius: 5px;
+    background: black;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+    margin: 0 auto;
+
+}
+  canvas {
+      padding:20px;
+      margin-left: auto;
+      margin-right: auto;
+      display: block;
+      width: auto;
+      background-color: whitesmoke;
+      border:2px solid gray;
+      border-radius: 25px;
+    }
+   </style>
 </head>
 
 <body>

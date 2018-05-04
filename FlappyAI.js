@@ -3,12 +3,10 @@ let totalPopulation = 500;
 let allBirds = [];
 let activeBirds = [];
 let counter = 0;
-
+let wallspacing=50;
+let numBestBirds=10;
 function setup() {
   createCanvas(800,600);
-
-
-  slider = createSlider(1, 10, 1);
 
   for (let i = 0; i < totalPopulation; i++) {
     var bird = new Bird();
@@ -21,7 +19,9 @@ function setup() {
 function draw() {
   background(0);
   graphics();
-  for(var i = 0;i<slider.value();i++){
+  sliderval = document.getElementById("vel").value;
+
+  for(var i = 0;i<sliderval;i++){
     if(activeBirds.length==0){
       //create new generation and reset simulation
       reset();
@@ -40,7 +40,6 @@ function play(){
   }
 
   //Create walls every 120 frames
-  let wallspacing=80;
   if(counter % wallspacing == wallspacing-1){
       walls.push(new Wall());
   }
@@ -74,7 +73,7 @@ function updateWalls(){
 }
 
 function reset(){
-    getBestBirds(5);
+    getBestBirds(numBestBirds);
     setWalls();
 }
 function getBestBirds(num){
@@ -116,10 +115,11 @@ function setWalls(){
   counter = 0;
 }
 function closestWall(){
-  let closeWall = walls[0];
+  let closeWall = new Wall;
+  closeWall.x = width;
 
     for(var j = 0; j<walls.length;j++){
-      if(walls[j].x > activeBirds[0].x && walls[j].x<closeWall.x){
+      if(walls[j].x > width/4-walls[j].width && walls[j].x < closeWall.x){
         closeWall=walls[j];
       }
     }
