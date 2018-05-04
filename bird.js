@@ -16,7 +16,10 @@ class Bird{
     this.y = random(0,height);
     this.gravity = 2;
     this.velocity = 0;
-    this.r = 25;
+    this.r = 20;
+    this.red = random(0,255);
+    this.blue = random(0,255);
+    this.green = random(0,255);
 
 
 

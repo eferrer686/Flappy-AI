@@ -1,12 +1,16 @@
 var walls=[];
-let totalPopulation = 500;
+let totalPopulation = 100;
 let allBirds = [];
 let activeBirds = [];
 let counter = 0;
 let wallspacing=50;
 let numBestBirds=10;
+let bestScore = 0;
+let actualScore = 0;
+let generation = 1;
+
 function setup() {
-  createCanvas(800,600);
+  createCanvas(800,400);
 
   for (let i = 0; i < totalPopulation; i++) {
     var bird = new Bird();
@@ -37,13 +41,19 @@ function play(){
   //Update birds movement
   for(var i = 0;i < activeBirds.length ;i++){
     activeBirds[i].update();
+    if(activeBirds[i].score > bestScore){
+      bestScore=activeBirds[i].score;
+    }
   }
+
+
 
   //Create walls every 120 frames
   if(counter % wallspacing == wallspacing-1){
       walls.push(new Wall());
   }
   counter++;
+  actualScore=counter;
 
   //update walls
   updateWalls();
@@ -73,6 +83,7 @@ function updateWalls(){
 }
 
 function reset(){
+    generation++;
     getBestBirds(numBestBirds);
     setWalls();
 }
@@ -127,8 +138,12 @@ function closestWall(){
 
 }
 function graphics(){
-
+    document.getElementById("generation").innerHTML = "Generation number: " + generation;
+    document.getElementById("alive").innerHTML = "Number of birds alive: " + activeBirds.length;
+    document.getElementById("bestscore").innerHTML = "Best Score: " + bestScore;
+    document.getElementById("score").innerHTML = "Score: " + actualScore;
     //Update birds movement
+
     for(var i = 0;i < activeBirds.length ;i++){
       activeBirds[i].show();
     }

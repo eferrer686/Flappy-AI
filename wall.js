@@ -29,7 +29,7 @@ class Wall{
   }
 
   hits(bird){
-    if(bird.y+(bird.r/2) < this.y|| bird.y > this.bottom){
+    if(bird.y-(bird.r) < this.y|| bird.y+(bird.r) > this.bottom){
       if(bird.x > this.x && bird.x < this.x+this.width){return true;}
     }
   }
