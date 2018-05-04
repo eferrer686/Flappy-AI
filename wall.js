@@ -1,7 +1,7 @@
 class Wall{
   constructor(){
     this.width = 75;
-    this.velocity = 5;
+    this.velocity = 10;
     this.space = 100;
 
     this.x = width;

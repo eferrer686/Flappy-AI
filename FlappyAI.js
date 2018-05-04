@@ -1,28 +1,34 @@
 var walls=[];
-let totalPopulation = 100;
+let totalPopulation = 500;
 let allBirds = [];
 let activeBirds = [];
 let counter = 0;
 
 function setup() {
   createCanvas(800,600);
+
+
   slider = createSlider(1, 10, 1);
+
   for (let i = 0; i < totalPopulation; i++) {
     var bird = new Bird();
     activeBirds.push(bird);
     allBirds.push(bird);
   }
+
 }
 
 function draw() {
-
   background(0);
-  if(activeBirds.length==0){
-    //create new generation and reset simulation
-    reset();
-  }else{
-    //Run or keep running simulation
-    play();
+  graphics();
+  for(var i = 0;i<slider.value();i++){
+    if(activeBirds.length==0){
+      //create new generation and reset simulation
+      reset();
+    }else{
+      //Run or keep running simulation
+        play();
+    }
   }
 
 }
@@ -31,15 +37,11 @@ function play(){
   //Update birds movement
   for(var i = 0;i < activeBirds.length ;i++){
     activeBirds[i].update();
-    activeBirds[i].show();
-    if(activeBirds[i].y==height || activeBirds[i].y==0){
-      activeBirds.splice(i,1);
-    }
-
   }
 
   //Create walls every 120 frames
-  if(counter % 120 == 119){
+  let wallspacing=80;
+  if(counter % wallspacing == wallspacing-1){
       walls.push(new Wall());
   }
   counter++;
@@ -49,29 +51,30 @@ function play(){
 
   //Make birds "think"
   for(var i = 0;i < activeBirds.length ;i++){
-    if(walls.length>0){activeBirds[i].think(walls[0]);}
+
+    if(walls.length>0){activeBirds[i].think(closestWall());}
   }
 
 }
 function updateWalls(){
   for(var i = walls.length -1;i >= 0;i--){
     walls[i].update();
-    walls[i].show();
+
+    //Delete birds hitting walls
+    for(var j = activeBirds.length -1;j >= 0;j--){
+      if(activeBirds[j].y==height || activeBirds[j].y==0 || walls[i].hits(activeBirds[j])){
+        activeBirds.splice(j,1);
+      }
+    }
     //Delete walls out of screen
     if(walls[i].offscreen()){
       walls.splice(i,1)
-    }
-    //Delete birds hitting walls
-    for(var j = activeBirds.length -1;j >= 0;j--){
-      if(walls[i].hits(activeBirds[j])){
-        activeBirds.splice(j,1);
-      }
     }
   }
 }
 
 function reset(){
-    getBestBirds(4);
+    getBestBirds(5);
     setWalls();
 }
 function getBestBirds(num){
@@ -83,13 +86,13 @@ function getBestBirds(num){
   for(var i = 0; i< allBirds.length ; i++){
     for(var j = 0 ; j<num ; j++){
 
-      if (allBirds[i].score > bestBirds[j].score){
-        newBird = allBirds.splice(i,1)[0];
+      if (i<allBirds.length && allBirds[i].score > bestBirds[j].score){
 
+        newBird = allBirds.splice(i,1)[0];
         bestBirds[j]=newBird;
       }
     }
-    console.log(bestBirds[0].score);
+
   }
 
   replacePopulation(bestBirds,num);
@@ -111,4 +114,28 @@ function setWalls(){
   walls = [];
   walls[0] = new Wall;
   counter = 0;
+}
+function closestWall(){
+  let closeWall = walls[0];
+
+    for(var j = 0; j<walls.length;j++){
+      if(walls[j].x > activeBirds[0].x && walls[j].x<closeWall.x){
+        closeWall=walls[j];
+      }
+    }
+    return closeWall;
+
+}
+function graphics(){
+
+    //Update birds movement
+    for(var i = 0;i < activeBirds.length ;i++){
+      activeBirds[i].show();
+    }
+
+    //update walls graphics
+    for(var i=0;i < walls.length;i++){
+      walls[i].show();
+    }
+
 }

@@ -11,12 +11,12 @@ function mutate(x) {
 
 class Bird{
   constructor(){
-    this.lift = -10;
+    this.lift = -2;
     this.x = width/4;
     this.y = random(0,height);
     this.gravity = 1;
     this.velocity = 0;
-    this.r = 30;
+    this.r = 10;
 
 
 
