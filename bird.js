@@ -21,16 +21,13 @@ class Bird{
     this.blue = random(0,255);
     this.green = random(0,255);
 
-
-
-    this.brain = new NeuralNetwork(5,5,1);
+    this.brain = new NeuralNetwork(5,6,1);
 
     this.score = 0;
-    this.fitness = 0;
   }
   show(){
    ellipse(this.x,this.y,this.r);
-   fill(255);
+
   }
   update(){
 
@@ -65,6 +62,7 @@ class Bird{
     input[2] = wall.y;
     input[3] = wall.bottom;
     input[4] = this.velocity;
+
     let output = this.brain.predict(input);
     if(output[0]>0.5){
       this.jump();

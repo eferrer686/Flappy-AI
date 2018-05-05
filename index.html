@@ -12,7 +12,6 @@
     <script language="javascript" type="text/javascript" src="libraries/p5.dom.js"></script>
     <script language="javascript" type="text/javascript" src="nn/matrix.js"></script>
     <script language="javascript" type="text/javascript" src="nn/nn.js"></script>
-    <script language="javascript" type="text/javascript" src="geneticAlg.js"></script>
     <script language="javascript" type="text/javascript" src="bird.js"></script>
     <script language="javascript" type="text/javascript" src="wall.js"></script>
     <script language="javascript" type="text/javascript" src="FlappyAI.js"></script>
@@ -28,10 +27,14 @@
     </td>
     <td>
       <div class="slider">
-        <input type="range" min="1" max="100" value="1" class="slider" id="vel">
+        <input type="range" min="1" max="1000" value="1" class="slider" id="vel">
       </div>
     </td>
   </table>
+
+  <div class="footer">
+    <p>Created by Eduardo Ferrer Mac Gregor Ruiz</p>
+  </div>
   <!-- This line removes any default padding and style.
        You might only need one of these values set. -->
   <style>
@@ -42,7 +45,9 @@
       color: whitesmoke;
       font-weight: bold;
     }
-  html{background-color: cornflowerblue;}
+  html{
+      background: linear-gradient(to right, #186dc7,#499bea,#186dc7);
+    }
   body {padding: 0; margin: 0;}
   .slider {
 
@@ -51,7 +56,7 @@
     height: 20px;
     width: 400px;
     border-radius: 10px;
-    background: blue;
+    background: white;
     outline: none;
     opacity: 0.7;
     -webkit-transition: .2s;
@@ -72,6 +77,15 @@
       border-radius: 25px;
       align-items: center;
     }
+  .footer {
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      background-color: #0066ff;
+      color: white;
+      text-align: center;
+  }
    </style>
 </head>
 

@@ -1,5 +1,5 @@
 var walls=[];
-let totalPopulation = 100;
+let totalPopulation = 200;
 let allBirds = [];
 let activeBirds = [];
 let counter = 0;
@@ -17,6 +17,7 @@ function setup() {
     activeBirds.push(bird);
     allBirds.push(bird);
   }
+  walls.push(new Wall());
 
 }
 
@@ -112,6 +113,7 @@ function replacePopulation(bestBirds,num){
   activeBirds=[];
   for(var i = 0; i<totalPopulation ; i++){
     var newBird = new Bird;
+
     newBird.setBrain(bestBirds[i%num].brain.copy());
     newBird.mutate();
 
@@ -138,19 +140,22 @@ function closestWall(){
 
 }
 function graphics(){
-    document.getElementById("generation").innerHTML = "Generation number: " + generation;
-    document.getElementById("alive").innerHTML = "Number of birds alive: " + activeBirds.length;
-    document.getElementById("bestscore").innerHTML = "Best Score: " + bestScore;
-    document.getElementById("score").innerHTML = "Score: " + actualScore;
+    document.getElementById("generation").innerHTML = "Generation number:   " + generation;
+    document.getElementById("alive").innerHTML = "Number of birds alive:  " + activeBirds.length;
+    document.getElementById("bestscore").innerHTML = "Best Score:   " + (Math.floor((bestScore-75)/wallspacing)+1);
+    document.getElementById("score").innerHTML = "Score:  " + (Math.floor((actualScore-75)/wallspacing)+1);
     //Update birds movement
-
+    noStroke();
+    fill(255,100);
     for(var i = 0;i < activeBirds.length ;i++){
       activeBirds[i].show();
     }
 
     //update walls graphics
+    fill(255);
     for(var i=0;i < walls.length;i++){
       walls[i].show();
+
     }
 
 }
