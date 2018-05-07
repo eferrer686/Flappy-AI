@@ -8,9 +8,15 @@ let numBestBirds=10;
 let bestScore = 0;
 let actualScore = 0;
 let generation = 1;
-
-function setup() {
-  createCanvas(800,400);
+function resetAll(){
+  activeBirds=[];
+  allBirds=[];
+  bestBirds=[];
+  bestScore=0;
+  actualScore=0;
+  generation=1;
+  counter=0;
+  walls=[];
 
   for (let i = 0; i < totalPopulation; i++) {
     var bird = new Bird();
@@ -18,6 +24,16 @@ function setup() {
     allBirds.push(bird);
   }
   walls.push(new Wall());
+}
+function setup() {
+
+  var flappyAI = createCanvas(800,400);
+  flappyAI.show();
+  flappyAI.parent("flappyAI");
+
+  resetAll();
+
+
 
 }
 

@@ -1,10 +1,46 @@
 <html>
 <head>
   <meta charset="UTF-8">
+<link rel="icon" href="icon.png">
   <title>Flappy AI</title>
-  <h1>Flappy AI</h1>
-  <h2>Small AI using P5.js libraries and NEAT algorithm!</h2>
-  <div class="flappyAI">
+  <h1 class="titlePage">Flappy AI</h1>
+    <h2>Small AI using P5.js libraries and NEAT algorithm!</h2>
+    <table class="scores">
+      <tr>
+        <td>
+          <p id="generation">Generation number: </p>
+        </td>
+        <td>
+          <p id="score">Score: </p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+            <p id="alive">Number of birds alive: </p>
+        </td>
+        <td>
+          <p id="bestscore">Best Score: </p>
+        </td>
+      </tr>
+    </table>
+
+  <table class="table">
+    <td>
+      <p>Speed:</p>
+    </td>
+    <td>
+      <div class="slider">
+        <input type="range" min="1" max="100" value="1" class="slider" id="vel">
+      </div>
+    </td>
+    <td>
+      <div class="reset">
+        <button type="button" onclick="resetAll()" class="reset" id="reset">Reset</button>
+      </div>
+    </td>
+  </table>
+
+  <div class="flappyAI" id="flappyAI">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <!-- PLEASE NO CHANGES BELOW THIS LINE (UNTIL I SAY SO) -->
     <script language="javascript" type="text/javascript" src="libraries/p5.js"></script>
@@ -17,20 +53,8 @@
     <script language="javascript" type="text/javascript" src="FlappyAI.js"></script>
     <!-- OK, YOU CAN MAKE CHANGES BELOW THIS LINE AGAIN -->
   </div>
-  <p id="generation">Generation number: </p>
-  <p id="alive">Number of birds alive: </p>
-  <p id="score">Score: </p>
-  <p id="bestscore">Best Score: </p>
-  <table class="table">
-    <td>
-      <p>Speed:</p>
-    </td>
-    <td>
-      <div class="slider">
-        <input type="range" min="1" max="1000" value="1" class="slider" id="vel">
-      </div>
-    </td>
-  </table>
+
+
 
   <div class="footer">
     <p>Created by Eduardo Ferrer Mac Gregor Ruiz</p>
@@ -38,9 +62,22 @@
   <!-- This line removes any default padding and style.
        You might only need one of these values set. -->
   <style>
-  h1,h2,p {
+  @font-face {
+    font-family: 'titleFont'; /*a name to be used later*/
+    src: url('fonts/title.ttf'); /*URL to font*/
+  }
+
+  p,h2 {
     padding: 5px;
-      font-family: sans-serif;
+    text-align: center;
+    color: whitesmoke;
+    font-weight: bold;
+    font-family: sans-serif;
+  }
+  .titlePage{
+      padding-top: 20px;
+      font-size: 70;
+      font-family: titleFont;
       text-align: center;
       color: whitesmoke;
       font-weight: bold;
@@ -50,10 +87,8 @@
     }
   body {padding: 0; margin: 0;}
   .slider {
-
     position: relative;
-
-    height: 20px;
+    height: 30px;
     width: 400px;
     border-radius: 10px;
     background: white;
@@ -63,8 +98,15 @@
     transition: opacity .2s;
     margin: 0 auto;
   }
-  .table{
+  table{
     margin: 0 auto;
+    text-align: left;
+    font-size: 18;
+  }
+  td p{
+    padding-left: 20px;
+    padding-right: 20px;
+    text-align: left;
   }
   canvas {
       padding:20px;
@@ -85,6 +127,18 @@
       background-color: #0066ff;
       color: white;
       text-align: center;
+  }
+  .flappyAI{
+    padding-bottom: 100px;
+  }
+  .reset{
+    background-color: cornflowerblue;
+    border: none;
+    color: white;
+    border-radius: 4px;
+    text-decoration: none;
+    margin: 8px 8px;
+    cursor: pointer;
   }
    </style>
 </head>
